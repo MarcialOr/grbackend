@@ -160,11 +160,17 @@ namespace grbackend.Models
 
                 entity.Property(e => e.Clienteid).HasColumnName("clienteid");
 
+                entity.Property(e => e.Comentario)
+                    .HasColumnName("comentario")
+                    .HasColumnType("character varying");
+
                 entity.Property(e => e.Descripcion)
                     .HasColumnName("descripcion")
                     .HasColumnType("character varying");
 
-                entity.Property(e => e.Estado).HasColumnName("estado");
+                entity.Property(e => e.Estado)
+                    .HasColumnName("estado")
+                    .HasColumnType("character varying");
 
                 entity.Property(e => e.Precio).HasColumnName("precio");
 
@@ -176,11 +182,6 @@ namespace grbackend.Models
                     .WithMany(p => p.Historicotrabajo)
                     .HasForeignKey(d => d.Clienteid)
                     .HasConstraintName("fk_clienteid");
-
-                entity.HasOne(d => d.Ranking)
-                    .WithMany(p => p.Historicotrabajo)
-                    .HasForeignKey(d => d.Rankingid)
-                    .HasConstraintName("fk_rankingid");
 
                 entity.HasOne(d => d.Tecnico)
                     .WithMany(p => p.Historicotrabajo)
@@ -277,6 +278,10 @@ namespace grbackend.Models
                 entity.Property(e => e.Presupuesto).HasColumnName("presupuesto");
 
                 entity.Property(e => e.Rankingid).HasColumnName("rankingid");
+
+                entity.Property(e => e.Rtn)
+                    .HasColumnName("rtn")
+                    .HasColumnType("character varying");
 
                 entity.Property(e => e.Sobremi)
                     .HasColumnName("sobremi")

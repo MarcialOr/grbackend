@@ -25,6 +25,7 @@ namespace grbackend.Models
         public DateTime? FechaFinal { get; set; }
         public string Path { get; set; }
         public int? Telefono { get; set; }
+        public string Rtn { get; set; }
 
         public virtual Categoria Categoria { get; set; }
         public virtual Maestroranking Ranking { get; set; }

@@ -8,7 +8,6 @@ namespace grbackend.Models
         public Maestroranking()
         {
             Cliente = new HashSet<Cliente>();
-            Historicotrabajo = new HashSet<Historicotrabajo>();
             Tecnico = new HashSet<Tecnico>();
         }
 
@@ -19,7 +18,6 @@ namespace grbackend.Models
         public string Comentario { get; set; }
 
         public virtual ICollection<Cliente> Cliente { get; set; }
-        public virtual ICollection<Historicotrabajo> Historicotrabajo { get; set; }
         public virtual ICollection<Tecnico> Tecnico { get; set; }
     }
 }

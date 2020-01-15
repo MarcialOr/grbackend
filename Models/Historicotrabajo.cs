@@ -11,10 +11,10 @@ namespace grbackend.Models
         public string Descripcion { get; set; }
         public double? Precio { get; set; }
         public int? Rankingid { get; set; }
-        public int? Estado { get; set; }
+        public string Estado { get; set; }
+        public string Comentario { get; set; }
 
         public virtual Cliente Cliente { get; set; }
-        public virtual Maestroranking Ranking { get; set; }
         public virtual Tecnico Tecnico { get; set; }
     }
 }
