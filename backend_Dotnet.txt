@@ -1,0 +1,49 @@
+
+1)Creando proyecto nuevo de backend:
+dotnet new webapi -n Nombredelproyecto
+
+2)Instalar dependencias:
+	dotnet add package Microsoft.EntityFrameworkCore --version 3.0.0
+	dotnet add package Microsoft.EntityFrameworkCore.Design --version 3.0.0
+	dotnet add package Npgsql.EntityFrameworkCore.PostgreSQL --version 3.0.1
+	dotnet add package Microsoft.EntityFrameworkCore.Tools --version 3.0.0
+	dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design --version 3.0.0
+	dotnet add package Microsoft.EntityFrameworkCore.SqlServer --version 3.0.0 		
+	dotnet add package Microsoft.AspNetCore.Cors --version 2.2.0
+
+Scafolding la base de datos en visualcode:
+	Primera vez:
+3)dotnet ef dbcontext scaffold "User ID = postgres;Password=Marcial1995;Server=localhost;Port=5432;Database=grback;Integrated Security=true; Pooling=true;" Npgsql.EntityFrameworkCore.PostgreSQL -o Models
+	
+4)	Luego de correr el comando modificar startup :
+	
+	Dentro de ConfigureService debajo de Service.AddMvc
+
+		 services.AddEntityFrameworkNpgsql().AddDbContext<grbackContext>(opt => 
+           opt.UseNpgsql(Configuration.GetConnectionString("MyWebApiConnection")));
+            services.AddCors(options => 
+            {
+                options.AddPolicy("CorsPolicy",
+                builder => builder.AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .AllowCredentials());
+            });
+           -------------------------------------------------------
+	
+5)	Dentro de Configure
+		app.UseCors("CorsPolicy");
+
+6) 	Luego en el archivo appsettings.json debemos agregar este codigo debajo de allowedhost:"*",
+		 "ConnectionStrings":{
+    "MyWebApiConnection" : "User ID = postgres;Password=Marcial1995;Server=localhost;Port=5432;Database=grback;Integrated Security=true; Pooling=true;"
+  }
+
+
+	Para actualizar el segundo para cuando vayamos modificando nuestras tablas:
+7)dotnet ef dbcontext scaffold "User ID = postgres;Password=Marcial1995;Server=localhost;Port=5432;Database=grback;Integrated Security=true; Pooling=true;" Npgsql.EntityFrameworkCore.PostgreSQL -o Models -f
+
+Genrando controladores correcto :
+8)dotnet aspnet-codegenerator controller -name ClienteController -actions -api -m Cliente -dc grbackContext -outDir Controllers
+
+dotnet aspnet-codegenerator controller -name ClienteController -actions -api -outDir Controllers
